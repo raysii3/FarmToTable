@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "115821914602",
+    "firebase_url": "https://farmtotable-fe158.firebaseio.com",
+    "project_id": "farmtotable-fe158",
+    "storage_bucket": "farmtotable-fe158.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115821914602:android:18f4dfa6e588beba",
+        "android_client_info": {
+          "package_name": "com.f2tdevproj.farmtotable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115821914602-j3bj0hdsa7nig44p9935vfb791hlfvf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.f2tdevproj.farmtotable",
+            "certificate_hash": "22e592f95bf90cf0d0896ab1fcadf364b1ccfc31"
+          }
+        },
+        {
+          "client_id": "115821914602-ghvh285lak4i57klrkikkh5p4gfr8o0t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVDszDI7TErHumUEe5NMHFslx8zP2Qq98"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115821914602-ghvh285lak4i57klrkikkh5p4gfr8o0t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
