@@ -37,7 +37,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="238dp"
+        android:drawableLeft="@drawable/ic_action_password"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <EditText
@@ -47,9 +49,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="218dp"
+        android:hint="Username"
+        android:drawableLeft="@drawable/ic_action_username"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Username" />
+        android:inputType="textPersonName"/>
 
     <TextView
         android:id="@+id/textView6"
@@ -62,7 +65,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="241dp"
+        android:layout_width="216dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -85,6 +88,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="17dp"
-        android:text="Farmer Login click here" />
+        android:text="Customer Login click here" />
 
 </RelativeLayout>
