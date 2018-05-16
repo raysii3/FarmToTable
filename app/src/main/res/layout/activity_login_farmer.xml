@@ -28,7 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        app:srcCompat="@drawable/LogoFarmtoTable" />
+        app:srcCompat="@drawable/logofarmtotable" />
 
     <EditText
         android:id="@+id/editText"
