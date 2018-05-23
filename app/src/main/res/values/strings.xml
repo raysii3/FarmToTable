@@ -24,4 +24,10 @@
     <string name="create_account">create account</string>
     <string name="sign_in">Sign In</string>
     <string name="verify_email">Verify Email</string>
+    <string name="sign_up">Confirm</string>
+    <string name="customer_sign_up">Customer</string>
+    <string name="description">Description</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>
