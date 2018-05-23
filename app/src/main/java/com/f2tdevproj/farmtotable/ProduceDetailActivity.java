@@ -67,11 +67,12 @@ public class ProduceDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.produce_detail_frag);
 
-        String id = getIntent().getStringExtra("ID");
+        final String id = getIntent().getStringExtra("ID");
+        Log.d(TAG, "Produce selected = " + id);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference("UserShoppingCart");
-
+        ButterKnife.bind(this);
 
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,24 +80,25 @@ public class ProduceDetailActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick: Submit pressed");
                 int quantity = Integer.parseInt(quantityChosen.getText().toString());
                 int tempMinOrder = Integer.parseInt(minorder.getText().toString());
-                if(quantity > tempMinOrder){
-                    Intent intent = new Intent(ProduceDetailActivity.this, ShoppingCart_Frag.class);
-
-                    ProduceDetailActivity.this.startActivity(intent);
-                }
+                Log.d(TAG, "Quantity:" + quantity + " MinOrder:" + tempMinOrder);
+//                if(quantity > tempMinOrder){
+//                    Intent intent = new Intent(ProduceDetailActivity.this, ShoppingCart_Frag.class);
+//                    ProduceDetailActivity.this.startActivity(intent);
+//                }
             }
         });
 
-        sProduceQuery.startAt(id).endAt(id).addValueEventListener(new ValueEventListener() {
+        sProduceQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Produce produce = dataSnapshot.getValue(Produce.class);
-                produce.setItemId(dataSnapshot.getKey());
+                Produce produce = dataSnapshot.child(id).getValue(Produce.class);
                 Log.d(TAG, "Produce Details: \n" + produce);
+                produce.setItemId(id);
+
                 name.setText(produce.getName());
                 description.setText(produce.getDescription());
-                minorder.setText(produce.getMinorder());
-                stock.setText(produce.getStock());
+                minorder.setText(String.valueOf(produce.getMinorder()));
+                stock.setText(String.valueOf(produce.getStock()));
                 pricePerCollection.setText(produce.getPricepercollection());
                 collectionType.setText(produce.getCollectiontype());
                 collectionType2.setText(produce.getCollectiontype());
@@ -109,7 +111,7 @@ public class ProduceDetailActivity extends AppCompatActivity {
             }
         });
 
-        ButterKnife.bind(this);
+
     }
 
 }
