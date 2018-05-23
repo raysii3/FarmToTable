@@ -3,16 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/customer_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
+        android:text="@string/customer_sign_up" />
+
+    <EditText
+        android:id="@+id/signUpCustomerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="153dp"
+        android:drawableLeft="@drawable/ic_action_username"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName" />
+
     <EditText
         android:id="@+id/signUpCustomerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="238dp"
-        android:hint="Username"
-        android:drawableLeft="@drawable/ic_action_password"
+        android:layout_marginTop="221dp"
+        android:drawableLeft="@drawable/ic_menu_share"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -22,19 +43,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="174dp"
-        android:drawableLeft="@drawable/ic_action_username"
+        android:drawableLeft="@drawable/ic_action_password"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/customer_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="179dp"
-        android:text="@string/customer_sign_up" />
 
     <Button
         android:id="@+id/btnSignUpConfirmation"

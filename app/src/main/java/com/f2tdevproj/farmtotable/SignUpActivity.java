@@ -15,6 +15,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements
         View.OnClickListener {
@@ -23,17 +26,23 @@ public class SignUpActivity extends AppCompatActivity implements
 
     private EditText mEmailField;
     private EditText mPasswordField;
-
+    private EditText mUserNameField;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_customer);
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        userRef = mFirebaseDatabase.getReference("Users");
+
         // Views
         mEmailField = (EditText) findViewById(R.id.signUpCustomerEmail);
         mPasswordField = (EditText) findViewById(R.id.signUpCustomerPassword);
+        mUserNameField = (EditText) findViewById(R.id.signUpCustomerName);
 
         // Buttons
         findViewById(R.id.btnSignUpConfirmation).setOnClickListener(this);
@@ -59,7 +68,28 @@ public class SignUpActivity extends AppCompatActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                            if (user != null) {
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(mUserNameField.getText().toString())
+                                        .build();
+
+                                user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User profile updated.");
+                                        }
+                                    }
+                                });
+                                String uid = user.getUid();
+                                userRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
+                                userRef.child(uid).child("email").setValue(mEmailField.getText().toString());
+                            }
+                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // clears all previous activities task
+                            finish(); // destroy current activity..
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

@@ -18,8 +18,15 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +44,19 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.User_Name);
+        TextView navEmail = headerView.findViewById(R.id.User_email);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Default_User", Context.MODE_PRIVATE);
-        String user_name = sharedPreferences.getString("User_Name", "null");
+        // [START initialize_auth]
+        mAuth = FirebaseAuth.getInstance();
+        // [END initialize_auth]
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        String user_name = currentUser.getDisplayName();
+        String user_email = currentUser.getEmail();
         Toast.makeText(this, "Hello " + user_name, Toast.LENGTH_SHORT).show();
         navUsername.setText(user_name);
+        navEmail.setText(user_email);
         navigationView.setNavigationItemSelectedListener(this);
 
         ProduceCatalog_Frag produceCatalog_frag = new ProduceCatalog_Frag();
@@ -57,6 +72,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            finish();
         }
     }
 
@@ -95,10 +111,7 @@ public class MainActivity extends AppCompatActivity
             manager.beginTransaction().replace(R.id.RelativeLayout_for_Fragment, produceCatalog_frag).commit();
             getSupportActionBar().setTitle("Home");
         }  else if (id == R.id.nav_signout) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            FirebaseAuth.getInstance().signOut();
             finish();
         }
 
