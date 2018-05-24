@@ -35,12 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/addCustomerPassword"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
         android:drawableLeft="@drawable/ic_action_username"
-=======
-        android:layout_marginBottom="254dp"
-        android:drawableLeft="@drawable/ic_action_password"
->>>>>>> Layout
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress" />
@@ -49,15 +44,10 @@
         android:id="@+id/addCustomerPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="196dp"
         android:drawableLeft="@drawable/ic_action_password"
-=======
-        android:layout_centerInParent="true"
-        android:drawableLeft="@drawable/ic_action_username"
->>>>>>> Layout
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword" />
@@ -66,9 +56,8 @@
         android:id="@+id/customer_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/imageView5"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="262dp"
         android:text="Customer Login" />
 
     <Button
@@ -77,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="158dp"
+        android:layout_marginBottom="140dp"
         android:text="Sign in" />
 
     <Button
