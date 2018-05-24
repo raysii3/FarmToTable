@@ -76,7 +76,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="75dp"
-        android:text="Sign up/Register" />
+        android:text="Customer Sign up/Register" />
 
     <Button
         android:id="@+id/btnToFarmerPage"
