@@ -110,7 +110,15 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.RelativeLayout_for_Fragment, produceCatalog_frag).commit();
             getSupportActionBar().setTitle("Home");
-        }  else if (id == R.id.nav_signout) {
+//        }else if (id == R.id.nav_signout) {
+
+//        }else if (id == R.id.nav_signout) {
+
+//        }else if (id == R.id.nav_signout) {
+
+//        }else if (id == R.id.nav_signout) {
+
+        }else if (id == R.id.nav_signout) {
             FirebaseAuth.getInstance().signOut();
             finish();
         }

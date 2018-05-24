@@ -76,9 +76,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="stock"
                             android:textAlignment="center"
-                            android:textSize="12sp"
-                            android:text="stock"/>
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/collectionType"

@@ -81,10 +81,13 @@ public class ProduceDetailActivity extends AppCompatActivity {
                 int quantity = Integer.parseInt(quantityChosen.getText().toString());
                 int tempMinOrder = Integer.parseInt(minorder.getText().toString());
                 Log.d(TAG, "Quantity:" + quantity + " MinOrder:" + tempMinOrder);
-//                if(quantity > tempMinOrder){
-//                    Intent intent = new Intent(ProduceDetailActivity.this, ShoppingCart_Frag.class);
-//                    ProduceDetailActivity.this.startActivity(intent);
-//                }
+
+                if(quantity > tempMinOrder){
+                    Intent intent = new Intent(ProduceDetailActivity.this, ShoppingCart_Frag.class);
+                    intent.putExtra("ID", id);
+                    intent.putExtra("quantityChosen", quantity);
+                    ProduceDetailActivity.this.startActivity(intent);
+                }
             }
         });
 
