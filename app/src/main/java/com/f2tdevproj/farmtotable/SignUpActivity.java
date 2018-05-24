@@ -37,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_customer);
 
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         userRef = mFirebaseDatabase.getReference("Users");
 
@@ -44,7 +45,6 @@ public class SignUpActivity extends AppCompatActivity implements
         mEmailField = (EditText) findViewById(R.id.signUpCustomerEmail);
         mPasswordField = (EditText) findViewById(R.id.signUpCustomerPassword);
         mUserNameField = (EditText) findViewById(R.id.signUpCustomerName);
-
         // Buttons
         findViewById(R.id.btnSignUpConfirmation).setOnClickListener(this);
 
@@ -92,6 +92,8 @@ public class SignUpActivity extends AppCompatActivity implements
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // clears all previous activities task
                             finish(); // destroy current activity..
                             startActivity(intent);
+                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

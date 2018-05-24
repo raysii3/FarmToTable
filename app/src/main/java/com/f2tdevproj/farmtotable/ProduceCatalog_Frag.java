@@ -60,8 +60,7 @@ public class ProduceCatalog_Frag extends Fragment{
         attachRecyclerViewAdapter();
     }
 
-    @Override
-    public void onDestroyView() {
+    @Override public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
@@ -112,7 +111,7 @@ public class ProduceCatalog_Frag extends Fragment{
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getContext(), ProduceDetailActivity.class);
+                        Intent intent = new Intent(getContext(), ProduceDetail_Frag.class);
                         intent.putExtra("ID", model.getItemId());
                         getContext().startActivity(intent);
                     }

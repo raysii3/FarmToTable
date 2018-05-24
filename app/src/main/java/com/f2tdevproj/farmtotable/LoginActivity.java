@@ -31,9 +31,8 @@ public class LoginActivity extends AppCompatActivity implements
 
     private EditText mEmailField;
     private EditText mPasswordField;
-    // [START declare_auth]
+
     private FirebaseAuth mAuth;
-    // [END declare_auth]
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +48,6 @@ public class LoginActivity extends AppCompatActivity implements
         findViewById(R.id.btnCustomerSignIn).setOnClickListener(this);
         findViewById(R.id.btnCustomerSignUp).setOnClickListener(this);
         findViewById(R.id.btnToFarmerPage).setOnClickListener(this);
-
-        // [START initialize_auth]
-        mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
     }
 
     // [START on_start_check_user]
@@ -61,11 +56,8 @@ public class LoginActivity extends AppCompatActivity implements
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         if(isSignedIn()){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // clears all previous activities task
-            finish(); // destroy current activity..
-            startActivity(intent); // starts new activity
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
         }
     }
     // [END on_start_check_user]

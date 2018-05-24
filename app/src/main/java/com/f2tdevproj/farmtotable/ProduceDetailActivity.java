@@ -85,7 +85,7 @@ public class ProduceDetailActivity extends AppCompatActivity {
                 int tempMinOrder = Integer.parseInt(minorder.getText().toString());
                 Log.d(TAG, "Quantity:" + quantity + " MinOrder:" + tempMinOrder);
 
-                if(quantity > tempMinOrder){
+                if (quantity > tempMinOrder) {
                     Intent intent = new Intent(ProduceDetailActivity.this, ShoppingCart_Frag.class);
                     shoppingCartRef.child(user.getUid()).child(id).child("quantityChosen").setValue(quantity);
 
@@ -119,7 +119,4 @@ public class ProduceDetailActivity extends AppCompatActivity {
 
 
     }
-
-
-
 }
