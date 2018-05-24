@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -24,9 +25,11 @@ public class ShoppingCart_Frag extends Fragment {
     @BindView(R.id.ShoppingCart_ExpandableItemList)
     ExpandableListView listView;
 
-    @BindView(R.id.ShoppingCart_ExpandableItemList)
+    @BindView(R.id.btnCheckOut)
     Button btnCheckAll;
 
+    @BindView(R.id.chkbox_selectAll)
+    CheckBox chkBoxSelectAll;
 
     private Unbinder unbinder;
 
@@ -43,8 +46,6 @@ public class ShoppingCart_Frag extends Fragment {
 
 
         unbinder = ButterKnife.bind(this, rootView);
-
-
 
         return rootView;
     }
