@@ -26,7 +26,7 @@
         android:layout_height="154dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="32dp"
         app:srcCompat="@drawable/logofarmtotable" />
 
     <EditText
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="196dp"
+        android:layout_marginBottom="254dp"
         android:drawableLeft="@drawable/ic_action_password"
         android:ems="10"
         android:hint="Password"
@@ -45,8 +45,7 @@
         android:id="@+id/addCustomerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/addCustomerPassword"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:drawableLeft="@drawable/ic_action_username"
         android:ems="10"
         android:hint="Username"
@@ -58,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="179dp"
+        android:layout_marginTop="262dp"
         android:text="Customer Login" />
 
     <Button
@@ -67,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="134dp"
+        android:layout_marginBottom="158dp"
         android:text="Sign in" />
 
     <Button

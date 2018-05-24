@@ -81,8 +81,4 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 
-
-
-
-
 </android.support.constraint.ConstraintLayout>
