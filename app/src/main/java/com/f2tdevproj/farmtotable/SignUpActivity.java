@@ -27,6 +27,7 @@ public class SignUpActivity extends AppCompatActivity implements
     private EditText mEmailField;
     private EditText mPasswordField;
     private EditText mUserNameField;
+
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference userRef;
@@ -84,6 +85,7 @@ public class SignUpActivity extends AppCompatActivity implements
                                 String uid = user.getUid();
                                 userRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
                                 userRef.child(uid).child("email").setValue(mEmailField.getText().toString());
+
                             }
                             Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

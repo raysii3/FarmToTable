@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,9 +59,8 @@ public class ProduceDetailActivity extends AppCompatActivity {
     TextView collectionType3;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
+    private DatabaseReference shoppingCartRef;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,10 @@ public class ProduceDetailActivity extends AppCompatActivity {
         Log.d(TAG, "Produce selected = " + id);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference("UserShoppingCart");
+        shoppingCartRef = mFirebaseDatabase.getReference("UserShoppingCart");
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
+
         ButterKnife.bind(this);
 
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +87,8 @@ public class ProduceDetailActivity extends AppCompatActivity {
 
                 if(quantity > tempMinOrder){
                     Intent intent = new Intent(ProduceDetailActivity.this, ShoppingCart_Frag.class);
-                    intent.putExtra("ID", id);
-                    intent.putExtra("quantityChosen", quantity);
+                    shoppingCartRef.child(user.getUid()).child(id).child("quantityChosen").setValue(quantity);
+
                     ProduceDetailActivity.this.startActivity(intent);
                 }
             }
@@ -116,5 +119,7 @@ public class ProduceDetailActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }
