@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="86dp"
         android:layout_marginTop="15dp"
-        android:text="Username"
+        android:text="Farm Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupCustomerEmail" />
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="86dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Farm Name"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
