@@ -1,38 +1,55 @@
 package com.f2tdevproj.farmtotable;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class ShoppingCart_ExpandableItemAdaptor extends BaseExpandableListAdapter{
+    private static String TAG1 = "itemAdapter";
+
+    private Context context;
+    private boolean ShoppingList;
+    public static List<String> listDataHeader;
+    public static HashMap<String,List<Produce>> listHashMap;
+
+    public ShoppingCart_ExpandableItemAdaptor(Context context,List<String> listDataHeader, HashMap<String, List<Produce>> listHashMap, boolean shoppingList) {
+        this.context = context;
+        this.listDataHeader = listDataHeader;
+        this.listHashMap = listHashMap;
+        this.ShoppingList = shoppingList;
+    }
     @Override
     public int getGroupCount() {
-        return 0;
+        return listDataHeader.size();
     }
 
     @Override
     public int getChildrenCount(int i) {
-        return 0;
+        return listHashMap.get(listDataHeader.get(i)).size();
     }
 
     @Override
     public Object getGroup(int i) {
-        return null;
+        return listDataHeader.get(i);
     }
 
     @Override
     public Object getChild(int i, int i1) {
-        return null;
+        return listHashMap.get(listDataHeader.get(i)).get(i1);
     }
 
     @Override
     public long getGroupId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
     public long getChildId(int i, int i1) {
-        return 0;
+        return i1;
     }
 
     @Override
