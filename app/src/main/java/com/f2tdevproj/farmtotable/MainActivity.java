@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_signout) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            FirebaseAuth.getInstance().signOut();
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class FarmerMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -97,6 +99,7 @@ public class FarmerMainActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_signout2) {
             Intent intent = new Intent(FarmerMainActivity.this, LoginActivity.class);
+            FirebaseAuth.getInstance().signOut();
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

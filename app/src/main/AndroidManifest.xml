@@ -33,6 +33,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ProduceDetailActivity" />
         <activity android:name=".FarmerMainActivity" />
+        <activity android:name=".AddUpdateProduceActivity" />
     </application>
 
 </manifest>

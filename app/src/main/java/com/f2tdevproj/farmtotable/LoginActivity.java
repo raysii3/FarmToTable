@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         if(isSignedIn()){
+            Log.d(TAG, "LOGGED IN ");
             checkUserType();
         }
     }
