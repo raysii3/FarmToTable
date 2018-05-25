@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,31 +28,51 @@ public class SignUpActivity extends AppCompatActivity implements
     private EditText mEmailField;
     private EditText mPasswordField;
     private EditText mUserNameField;
+    private TextView mDefaultUser;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference userRef;
+    private DatabaseReference customerRef, farmerRef;
+
+    boolean isFarmer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup_customer);
+        setContentView(R.layout.activity_signup);
 
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        userRef = mFirebaseDatabase.getReference("Users");
+        customerRef = mFirebaseDatabase.getReference("Users");
+        farmerRef = mFirebaseDatabase.getReference("Farm");
 
         // Views
         mEmailField = (EditText) findViewById(R.id.signUpCustomerEmail);
         mPasswordField = (EditText) findViewById(R.id.signUpCustomerPassword);
         mUserNameField = (EditText) findViewById(R.id.signUpCustomerName);
+        mDefaultUser = findViewById(R.id.default_User);
+
         // Buttons
         findViewById(R.id.btnSignUpConfirmation).setOnClickListener(this);
+
+        isFarmer = getIntent().getBooleanExtra("isFarmer", false);
 
         // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        defaultUser(isFarmer);
+    }
+
+    private void defaultUser(boolean isFarmer){
+        if(!isFarmer)
+            mDefaultUser.setText(String.valueOf("Customer"));
+        else
+            mDefaultUser.setText(String.valueOf("Farmer"));
     }
 
     private void createAccount(String email, String password) {
@@ -83,16 +104,30 @@ public class SignUpActivity extends AppCompatActivity implements
                                     }
                                 });
                                 String uid = user.getUid();
-                                userRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
-                                userRef.child(uid).child("email").setValue(mEmailField.getText().toString());
+
+                                if(isFarmer){
+                                    farmerRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
+                                    farmerRef.child(uid).child("email").setValue(mEmailField.getText().toString());
+                                    farmerRef.child(uid).child("customer").setValue(true);
+
+                                    Intent intent = new Intent(SignUpActivity.this, FarmerMainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // clears all previous activities task
+                                    finish(); // destroy current activity..
+                                    startActivity(intent);
+                                }else{
+                                    customerRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
+                                    customerRef.child(uid).child("email").setValue(mEmailField.getText().toString());
+                                    customerRef.child(uid).child("farmer").setValue(true);
+
+                                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // clears all previous activities task
+                                    finish(); // destroy current activity..
+                                    startActivity(intent);
+                                }
 
                             }
-                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // clears all previous activities task
-                            finish(); // destroy current activity..
-                            startActivity(intent);
-                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
 
                         } else {
                             // If sign in fails, display a message to the user.

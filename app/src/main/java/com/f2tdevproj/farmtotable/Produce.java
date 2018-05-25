@@ -9,9 +9,6 @@ public class Produce {
     public String pricepercollection;
     public String category;
     public int itemQuantityChosen;
-
-
-
     public int minorder;
     public String collectiontype;
 

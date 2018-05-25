@@ -1,7 +1,10 @@
 package com.f2tdevproj.farmtotable;
 
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -85,11 +88,13 @@ public class ProduceDetailActivity extends AppCompatActivity {
                 int tempMinOrder = Integer.parseInt(minorder.getText().toString());
                 Log.d(TAG, "Quantity:" + quantity + " MinOrder:" + tempMinOrder);
 
-                if (quantity > tempMinOrder) {
-                    Intent intent = new Intent(ProduceDetailActivity.this, ShoppingCart_Frag.class);
+                if (quantity >= tempMinOrder) {
                     shoppingCartRef.child(user.getUid()).child(id).child("quantityChosen").setValue(quantity);
 
-                    ProduceDetailActivity.this.startActivity(intent);
+                    ShoppingCart_Frag ShoppingCart_Frag = new ShoppingCart_Frag();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.produceDetail_frag, ShoppingCart_Frag);
+                    transaction.commit();
                 }
             }
         });

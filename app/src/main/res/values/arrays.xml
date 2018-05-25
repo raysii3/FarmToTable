@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="produce_category">
+        <item>Fruits</item>
+        <item>Meat</item>
+        <item>Vegetables</item>
+        <item>Plants</item>
+        </string-array>
+    <string-array name="collectionType_array">
+        <item>kg</item>
+        <item>bdl</item>
+        <item>pnd</item>
+        <item>grm</item>
+    </string-array>
+</resources>

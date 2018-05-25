@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -75,7 +76,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/ID"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical|end"
@@ -91,11 +92,11 @@
                             android:text="kg" />
 
                         <TextView
-                            android:id="@+id/shoppingCart_QuantityChosen"
+                            android:id="@+id/shoppingCart_price"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:layout_weight="0.8"
+                            android:gravity="center"
                             android:text="No" />
 
 
@@ -114,7 +115,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/shoppingCart_itemQuantityChosen"
+                    android:id="@+id/shoppingCart_quantityChosen"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

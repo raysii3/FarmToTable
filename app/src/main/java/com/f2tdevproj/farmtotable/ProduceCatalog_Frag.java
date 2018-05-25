@@ -111,7 +111,7 @@ public class ProduceCatalog_Frag extends Fragment{
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getContext(), ProduceDetail_Frag.class);
+                        Intent intent = new Intent(getContext(), ProduceDetailActivity.class);
                         intent.putExtra("ID", model.getItemId());
                         getContext().startActivity(intent);
                     }
