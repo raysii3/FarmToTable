@@ -32,7 +32,8 @@
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ProduceDetailActivity" />
-        <activity android:name=".FarmerMainActivity" />
+        <activity android:name=".FarmerMainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".AddUpdateProduceActivity" />
     </application>
 

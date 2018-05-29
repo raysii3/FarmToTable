@@ -42,7 +42,7 @@ public class AddUpdateProduceActivity extends AppCompatActivity {
     EditText pricePerCollection;
 
     @BindView(R.id.updateAddInventory_productId)
-    EditText productId;
+    TextView productId;
 
     @BindView(R.id.updateAddInventory_productCategory)
     Spinner category;
@@ -57,12 +57,14 @@ public class AddUpdateProduceActivity extends AppCompatActivity {
     Button btnSubmit;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference produceDetailsRef, productCategoryRef;
+    private DatabaseReference produceDetailsRef, productCategoryRef, userRef;
     private FirebaseAuth mAuth;
+
+    String newIdKey;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.produce_detail_frag);
+        setContentView(R.layout.farmer_updateaddproduce);
 
         final String id = getIntent().getStringExtra("ID");
         Log.d(TAG, "Produce selected = " + id);
@@ -70,6 +72,8 @@ public class AddUpdateProduceActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         produceDetailsRef = mFirebaseDatabase.getReference("ProduceDetails");
         productCategoryRef = mFirebaseDatabase.getReference("ProductCategory");
+        userRef = mFirebaseDatabase.getReference("Users");
+
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
 
@@ -79,11 +83,12 @@ public class AddUpdateProduceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(!id.isEmpty() || id == null){
-                    produceDetailsRef.child(id).child("name").setValue(name.getText());
-                    produceDetailsRef.child(id).child("description").setValue(description.getText());
-                    produceDetailsRef.child(id).child("minorder").setValue(minOrder.getText());
-                    produceDetailsRef.child(id).child("stock").setValue(stock.getText());
+                if(id != null){
+                    produceDetailsRef.child(id).child("name").setValue(name.getText().toString());
+                    produceDetailsRef.child(id).child("description").setValue(description.getText().toString());
+                    produceDetailsRef.child(id).child("minorder").setValue(Integer.parseInt(minOrder.getText().toString()));
+                    produceDetailsRef.child(id).child("stock").setValue(Integer.parseInt(stock.getText().toString()));
+                    produceDetailsRef.child(id).child("pricepercollection").setValue(pricePerCollection.getText().toString());
                     productCategoryRef.child(category.getSelectedItem().toString()).child(id).setValue(true);
                     produceDetailsRef.child(id).child("category").setValue(category.getSelectedItem().toString());
                     produceDetailsRef.child(id).child("collectiontype").setValue(collectionType.getSelectedItem().toString());
@@ -96,14 +101,15 @@ public class AddUpdateProduceActivity extends AppCompatActivity {
 
                 }else{
                     String newId = produceDetailsRef.push().getKey();
-                    produceDetailsRef.child(newId).child("name").setValue(name.getText());
-                    produceDetailsRef.child(newId).child("description").setValue(description.getText());
-                    produceDetailsRef.child(newId).child("minorder").setValue(minOrder.getText());
-                    produceDetailsRef.child(newId).child("stock").setValue(stock.getText());
+                    produceDetailsRef.child(newId).child("name").setValue(name.getText().toString());
+                    produceDetailsRef.child(newId).child("description").setValue(description.getText().toString());
+                    produceDetailsRef.child(newId).child("minorder").setValue(Integer.parseInt(minOrder.getText().toString()));
+                    produceDetailsRef.child(newId).child("stock").setValue(Integer.parseInt(stock.getText().toString()));
+                    produceDetailsRef.child(newId).child("pricepercollection").setValue(pricePerCollection.getText().toString());
                     productCategoryRef.child(category.getSelectedItem().toString()).child(newId).setValue(true);
                     produceDetailsRef.child(newId).child("category").setValue(category.getSelectedItem().toString());
                     produceDetailsRef.child(newId).child("collectiontype").setValue(collectionType.getSelectedItem().toString());
-
+                    userRef.child(user.getUid()).child("producelist").child(newId).setValue(true);
                     Intent intent = new Intent(AddUpdateProduceActivity.this, FarmerMainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // clears all previous activities task
@@ -117,18 +123,21 @@ public class AddUpdateProduceActivity extends AppCompatActivity {
         sProduceQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Produce produce = dataSnapshot.child(id).getValue(Produce.class);
-                Log.d(TAG, "Produce Details: \n" + produce);
-                produce.setItemId(id);
+                if(id != null){
+                    Produce produce = dataSnapshot.child(id).getValue(Produce.class);
+                    Log.d(TAG, "Produce Details: \n" + produce);
+                    produce.setItemId(id);
 
-                name.setText(produce.getName());
-                description.setText(produce.getDescription());
-                minOrder.setText(String.valueOf(produce.getMinorder()));
-                stock.setText(String.valueOf(produce.getStock()));
-                pricePerCollection.setText(produce.getPricepercollection());
-                productId.setText(produce.getItemId());
-                category.setSelection(getIndex(category, produce.getCategory()));
-                collectionType.setSelection(getIndex(collectionType, produce.getCollectiontype()));
+                    name.setText(produce.getName());
+                    description.setText(produce.getDescription());
+                    minOrder.setText(String.valueOf(produce.getMinorder()));
+                    stock.setText(String.valueOf(produce.getStock()));
+                    pricePerCollection.setText(produce.getPricepercollection());
+                    productId.setText(produce.getItemId());
+                    category.setSelection(getIndex(category, produce.getCategory()));
+                    collectionType.setSelection(getIndex(collectionType, produce.getCollectiontype()));
+                }
+
             }
 
             @Override

@@ -43,7 +43,7 @@ public class ManageInventory_Frag extends Fragment {
     @BindView(R.id.btnAddProduce)
     Button mBtnAddProduce;
 
-    private ShoppingCart_RecyclerItemAdapter itemAdapter;
+    private ManageInventory_RecyclerItemAdapter itemAdapter;
     private List<Produce> produceList;
 
     private FirebaseDatabase mFirebaseDatabase;
@@ -56,7 +56,7 @@ public class ManageInventory_Frag extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.shopping_cart_frag, container, false);
+        View rootView = inflater.inflate(R.layout.farmer_manageinventory_frag, container, false);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         farmerProduceRef = mFirebaseDatabase.getReference();
@@ -68,16 +68,24 @@ public class ManageInventory_Frag extends Fragment {
         FirebaseUser user = mAuth.getCurrentUser();
         final String userID = user.getUid();
 
+        mBtnAddProduce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddUpdateProduceActivity.class);
+                getContext().startActivity(intent); // destroy current activity..
+                startActivity(intent);
+            }
+        });
+
         farmerProduceRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 produceList = new ArrayList<>();
-                if (dataSnapshot.child("Farm").child(userID).exists()) {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.child("Farm").child(userID).child("producelist").getChildren()) {
+                if (dataSnapshot.child("Users").child(userID).exists()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.child("Users").child(userID).child("producelist").getChildren()) {
 
                         String itemID = dataSnapshot1.getKey();
                         Log.d(TAG, "item = " + itemID);
-
                         Produce produce = dataSnapshot.child("ProduceDetails").child(itemID).getValue(Produce.class);
                         Log.d(TAG, "Produce = " + produce);
                         produce.setItemId(itemID);
@@ -89,7 +97,7 @@ public class ManageInventory_Frag extends Fragment {
                     LinearLayoutManager manager = new LinearLayoutManager(getContext());
                     mRecyclerView.setLayoutManager(manager);
                     mRecyclerView.setHasFixedSize(true);
-                    itemAdapter = new ShoppingCart_RecyclerItemAdapter(ManageInventory_Frag.this.getActivity(), produceList);
+                    itemAdapter = new ManageInventory_RecyclerItemAdapter(ManageInventory_Frag.this.getActivity(), produceList);
                     mRecyclerView.setAdapter(itemAdapter);
                 }
             }

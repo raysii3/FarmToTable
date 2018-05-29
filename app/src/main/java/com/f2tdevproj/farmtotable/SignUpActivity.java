@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity implements
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference customerRef, farmerRef;
+    private DatabaseReference  userRef;
 
     boolean isFarmer;
 
@@ -43,8 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements
 
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        customerRef = mFirebaseDatabase.getReference("Users");
-        farmerRef = mFirebaseDatabase.getReference("Farm");
+        userRef = mFirebaseDatabase.getReference("Users");
 
         // Views
         mEmailField = (EditText) findViewById(R.id.signUpCustomerEmail);
@@ -106,9 +105,9 @@ public class SignUpActivity extends AppCompatActivity implements
                                 String uid = user.getUid();
 
                                 if(isFarmer){
-                                    farmerRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
-                                    farmerRef.child(uid).child("email").setValue(mEmailField.getText().toString());
-                                    farmerRef.child(uid).child("customer").setValue(true);
+                                    userRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
+                                    userRef.child(uid).child("email").setValue(mEmailField.getText().toString());
+                                    userRef.child(uid).child("farmer").setValue(true);
 
                                     Intent intent = new Intent(SignUpActivity.this, FarmerMainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -116,9 +115,9 @@ public class SignUpActivity extends AppCompatActivity implements
                                     finish(); // destroy current activity..
                                     startActivity(intent);
                                 }else{
-                                    customerRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
-                                    customerRef.child(uid).child("email").setValue(mEmailField.getText().toString());
-                                    customerRef.child(uid).child("farmer").setValue(true);
+                                    userRef.child(uid).child("name").setValue(mUserNameField.getText().toString());
+                                    userRef.child(uid).child("email").setValue(mEmailField.getText().toString());
+                                    userRef.child(uid).child("customer").setValue(true);
 
                                     Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

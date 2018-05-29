@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity implements
         mEmailField = (EditText) findViewById(R.id.addCustomerEmail);
         mPasswordField = (EditText) findViewById(R.id.addCustomerPassword);
         mCheckBox = findViewById(R.id.checkBox_farmer);
-
         // Buttons
         findViewById(R.id.btnSignIn).setOnClickListener(this);
         findViewById(R.id.btnSignUp).setOnClickListener(this);
@@ -77,6 +76,8 @@ public class LoginActivity extends AppCompatActivity implements
     private void checkUserType(){
         FirebaseUser user = mAuth.getCurrentUser();
         String userID = user.getUid();
+        Log.d(TAG, "User ID " + userID);
+
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
 
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -163,7 +164,8 @@ public class LoginActivity extends AppCompatActivity implements
             intent.putExtra("isFarmer", isFarmer);
             LoginActivity.this.startActivity(intent);
         }else if(i == R.id.checkBox_farmer){
-            isFarmer = mCheckBox.isSelected();
+            isFarmer = mCheckBox.isChecked();
+            Log.d(TAG, "Farmer:" + isFarmer);
         }
     }
 
